@@ -171,7 +171,7 @@ double ttor(double t)
 void usage(char *cmd){
 	printf("Calculate A/D lookup table for NTC thermistor / resistor voltage divider network\n");
 	printf("using temperature-resstance data points from a file for the thermistor as input.\n");
-	printf("Usage: %s [-s -40 -e 150 [-s AD_STEP (default=32)] filename\n", cmd);	
+	printf("Usage: %s [-s -40 -e 150 [-s AD_STEP (default=32)] -v 1 filename\n v = 0, 1,2\n", cmd);	
 }
 // ttor -s -20 e 150 
 /**
@@ -231,9 +231,10 @@ int main(int argc, char *argv[])
 			res = FormulaNTCRes(i);
 			vol = res*3300 / (res+10000);
 			xv = vol *4096/3300;
-			if(vb)
+			if(vb==1)
 				printf("%d %.1f  %.1f, %d\n", i ,res, vol, xv/* ttor(i)*/);
-			else printf(", %d	//%d\n",  xv, i/* ttor(i)*/);
+			else if(vb==2) printf(", %d	//%d	%d\n",  4096 - xv, i, i+20/* ttor(i)*/);
+			else printf(", %d	//%d	%d\n",  xv, i, i+20/* ttor(i)*/);
 		}
 	}else{
 		if (argc > 1) {

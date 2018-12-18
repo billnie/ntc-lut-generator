@@ -3,7 +3,8 @@ Copyright (C) 2007, 2013 - SoftQuadrat GmbH, Germany
 
 Calculate A/D lookup table for NTC thermistor / resistor voltage divider network
 using temperature-resstance data points from a file for the thermistor as input.
-Usage: ./ttor [-s -40 -e 150 [-s AD_STEP (default=32)] filename
+Usage: ./ttor [-s -40 -e 150 [-s AD_STEP (default=32)] -v 1 filename
+ v = 0, 1,2
 -20 526923.4  3238.5, 4019
 -19 495546.3  3234.7, 4014
 -18 466262.0  3230.7, 4009
