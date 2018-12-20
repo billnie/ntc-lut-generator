@@ -3,12 +3,14 @@ OC=objcopy
 ODIR=thermistor1.0
 
 CFLAGS += -DDEBUG=1
-all: 	lut rtot ttor coeff  clean
+all: 	lut rtot ttor coeff rtd clean
 
 
 lut:	libcoeff.o librtot.o thermistor.h lut.c
 	$(CC) lut.c -o lut libcoeff.o librtot.o -lm
 
+rtd: rtd.c
+	$(CC) rtd.c -o rtd
 
 ttor :  $(ODIR)/ttor.c
 	$(CC) $(ODIR)/ttor.c -o ttor -lm
@@ -20,7 +22,7 @@ coeff :  $(ODIR)/coeff.c
 	$(CC) $(ODIR)/coeff.c -o coeff -lm	
 
 clean:
-	rm -f $(ODIR)/coeff.o $(ODIR)/rtot.o $(ODIR)/ttor.o libcoeff.o librtot.o
+	rm -f $(ODIR)/coeff.o $(ODIR)/rtot.o $(ODIR)/ttor.o libcoeff.o librtot.o rtd.o
 
 
 $(ODIR)/coeff.o: $(ODIR)/coeff.c
