@@ -165,15 +165,16 @@ int main(int argc, char *argv[])
 	printf("start=%d end=%d step = %d\n", start, end, step);
 	if(step >0 &&end > start){
 		float res, vol,vol2;
-		int xv;
+		int xv,k=0;
 		for(i=start; i < end; i+=step){
 			res = floatCCalcurtd(i);
 			vol = res*12.5 ;
-			xv = vol *4096/3300;
+			xv = vol *4096/3300; 
 			if(vb==1)
 				printf("%d %.1f  %.1f, %d\n", i ,res, vol, xv/* ttor(i)*/);
 			else if(vb==2) printf(", %d	//%d	%d\n", 4096 - xv, i, i+20/* ttor(i)*/);
-			else printf(",%d	// %.2f,%d\n", (int)xv, res, i);
+			else printf(",%d	// %.2f,  %d,  %d\n", (int)xv, res, i,k);
+			k++;
 		}
 	}else{
 		while(1){
