@@ -41,3 +41,9 @@ The program can optionally accept parameters to change the default *R0*, as well
 *AD_MAX*, is the number of values the A/D can produce. The A/D in the PIC16F1828 is 10-bit, and thus this value is 2^10 = 1024.
 
 *AD_STEP* is the number of A/D points for each look-up point. For STC-1000+, 32 steps are used. That gives a total of 1024/32 = 32 look up points.
+
+Ref
+======
+[link1](https://github.com/nicholaspettit/thermocouple)
+[link2](https://github.com/apieum/thermocouple)
+
