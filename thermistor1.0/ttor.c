@@ -121,7 +121,7 @@ double a[] = {
 	-7.642331765196044e-006,
 	4.048572707661904e-007,
 };
-#define NTC_NOMINAL_RESISTANCE 50000
+int NTC_NOMINAL_RESISTANCE = 10000;
 #define NTC_NOMINAL_TEMPERATURE 25
 #define KELVIN_CONSTANT 273.15
 #define NTC_NOMINAL_CONSTANT 3950
@@ -188,11 +188,11 @@ int main(int argc, char *argv[])
 {
 	int i;
 	double t;
-	int start , end, step, vb;
+	int start , end, step, vb,re;
 	/* getopt */
 	int c;
-	start = -40; end = 150; step =0; vb =0;
-	while((c=getopt(argc, argv, "s:e:o:v:")) != -1) {
+	start = -40; end = 150; step =0; vb =0; re = 4700;
+	while((c=getopt(argc, argv, "s:e:o:v:r")) != -1) {
 		switch(c) {
 		case 's':
 			start=atoi(optarg);
@@ -206,6 +206,9 @@ int main(int argc, char *argv[])
 		case 'v':
 			vb=atoi(optarg);
 			break;	
+		case 'r':
+			re=atoi(optarg);
+			break;		
 		case '?':
 			// if (optopt == 'r' || optopt == 'm' || optopt == 's'){
 			// 	fprintf(stderr, "Option -%c requires an argument.\n", optopt);
@@ -229,12 +232,12 @@ int main(int argc, char *argv[])
 		int xv;
 		for(i=start; i < end; i+=step){
 			res = FormulaNTCRes(i);
-			vol = res*3300 / (res+10000);
+			vol = res*3300 / (res+re);
 			xv = vol *4096/3300;
 			if(vb==1)
 				printf("%d %.1f  %.1f, %d\n", i ,res, vol, xv/* ttor(i)*/);
-			else if(vb==2) printf(", %d	//%d	%d\n",  4096 - xv, i, i+20/* ttor(i)*/);
-			else printf(", %d	//%d	%d\n",  xv, i, i+20/* ttor(i)*/);
+			else if(vb==2) printf(", %d	//%d	%d\n",  4096 - xv, i, i+start/* ttor(i)*/);
+			else printf(", %d	//%d	%d\n",  xv, i, i+start/* ttor(i)*/);
 		}
 	}else{
 		if (argc > 1) {
