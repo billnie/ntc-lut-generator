@@ -40,7 +40,7 @@
  * instead of:
  *    66 * 2 = 132 bytes
  */
-#define TEMP_TABLE_SCALE 1000
+#define TEMP_TABLE_SCALE 1
 static const unsigned int temp_table[]
     #ifdef KTHERM_WITH_PROGMEM
     PROGMEM
@@ -369,7 +369,15 @@ int main(int argc, char **argv)
         }
         else
         {
-            fprintf(stderr, "Unknown option %s\n", argv[i]);
+            int mv, temp;
+            if(argc >=2){
+                mv = atoi(argv[1]);
+                temp = atoi(argv[2]);
+                temp = thermocoupleConvertWithCJCompensation(mv, temp);
+                fprintf(stderr, "temp = %d\n", temp);
+            }
+            printf("k-type argc = %d\n", argc);
+            fprintf(stderr, "Unknown option %s, argc=%d\n", argv[i],argc);
             goto usage;
         }
     }

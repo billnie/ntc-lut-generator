@@ -14,3 +14,6 @@ Accuracy
 --------
 ![](https://github.com/Miceuz/k-thermocouple-lib/raw/master/plots/error-voltage-vs-temperature.png)
 ![](https://github.com/Miceuz/k-thermocouple-lib/raw/master/plots/error-temperature-vs-voltage.png)
+
+# test
+  * ./ktherm 5491 20000  环境温度为20度时计算
